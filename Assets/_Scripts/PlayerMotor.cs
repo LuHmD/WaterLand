@@ -11,7 +11,7 @@ public class PlayerMotor : MonoBehaviour
     private Animator anim;
     private float dirX;
     private bool facingRight = false;
-    private Vector3 localScale; //flip character to face towards where it goes
+    Vector3 localScale; //flip character to face towards where it goes
    
 
     private void Start()
