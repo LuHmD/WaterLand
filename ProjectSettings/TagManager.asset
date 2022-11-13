@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Saw
+  - Bullet
+  - Enemy Patrol
+  - Platform
+  - Target
+  - Goal
+  - Ledge Hang
+  - Sword
   layers:
   - Default
   - TransparentFX
@@ -49,4 +57,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 92745409
+    locked: 0
+  - name: Player
+    uniqueID: 2791327481
     locked: 0
