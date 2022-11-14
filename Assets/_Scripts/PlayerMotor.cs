@@ -41,7 +41,7 @@ public class PlayerMotor : MonoBehaviour
         }
 
         if (rigid.velocity.y > 0) //Character goes UP
-            anim.SetBool("ifJumping", true);
+            anim.SetBool("isJumping", true);
 
         if(rigid.velocity.y < 0)
         {
