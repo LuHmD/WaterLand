@@ -18,6 +18,6 @@ public class CameraFollow : MonoBehaviour
         var targetPos = m_FollowTarget.position + offset;
         transform.position = targetPos; 
         if (!followVertical)
-            transform.position = new Vector3(m_FollowTarget.position.x,9.5f, m_FollowTarget.position.z) + offset;     
+            transform.position = new Vector3(m_FollowTarget.position.x, 9.5f, m_FollowTarget.position.z) + offset;     
     }
 }
