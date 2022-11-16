@@ -4,53 +4,64 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
-    
-
-    public float speed;
-    public Rigidbody2D rigid;
+    public float speed = 5f;
+    private Rigidbody2D rigid;
     private Animator anim;
     private float dirX;
-    private bool facingRight = false;
-    Vector3 localScale; //flip character to face towards where it goes
-   
+    private bool facingRight = true;
 
-    private void Start()
+    public Transform feet;
+
+    private bool isGrounded;
+
+    Vector3 localScale; //flip character to face towards where it goes
+    [SerializeField] float jumpForce;
+
+
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+    }
+    private void Start()
+    {
         localScale = transform.localScale;
-        speed = 5f;
     }
 
     private void Update()
     {
-        dirX = Input.GetAxisRaw("Horizontal") * speed;
-
-        if (Input.GetButtonDown("Jump") && rigid.velocity.y == 0)
-            rigid.AddForce(Vector2.up * 700f);
-
-        if (Mathf.Abs(dirX) > 0 && rigid.velocity.y == 0)
-            anim.SetBool("isRunning", true);
+        anim.SetBool("IsGrounded", isGrounded);
+        RaycastHit2D hit = Physics2D.BoxCast(feet.transform.position, new Vector2(0.5f, 0.5f), 0, Vector2.down, .2f);
+        if (hit)
+            isGrounded = true;
         else
-            anim.SetBool("isRunning", false);
+            isGrounded = false;
 
-        if(rigid.velocity.y == 0) //if character not moving
+        if (isGrounded)
         {
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", false);
         }
 
-        if (rigid.velocity.y > 0) //Character goes UP
-            anim.SetBool("ifJumping", true);
+        dirX = Input.GetAxisRaw("Horizontal") * speed;
 
-        if(rigid.velocity.y < 0)
+        if (Input.GetButtonDown("Jump") && isGrounded)
+            rigid.velocity = Vector2.up * jumpForce;
+
+        if (Mathf.Abs(dirX) > 0 && isGrounded)
+            anim.SetBool("isRunning", true);
+        else
+            anim.SetBool("isRunning", false);
+        // 0.3 is skin margin for accuracey of transitions. 
+        if (rigid.velocity.y > 0 + 0.3f) //Character goes UP
+            anim.SetBool("isJumping", true);
+
+        if (rigid.velocity.y < 0 + -0.3f)
         {
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", true);
-
         }
     }
-
     private void FixedUpdate()
     {
         rigid.velocity = new Vector2(dirX, rigid.velocity.y);
@@ -58,14 +69,19 @@ public class PlayerMotor : MonoBehaviour
 
     private void LateUpdate()
     {
-         if (dirX > 0)
-             facingRight = false;
-         else if (dirX < 0)
-             facingRight = true; 
+        if (dirX > 0)
+            facingRight = true;
+        else if (dirX < 0)
+            facingRight = false;
 
-         if (((facingRight) && (localScale.x < 0)) || ((facingRight) && (localScale.x > 0)))
-            localScale.x *= 1f;
+        if (facingRight)
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        else
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * -1f, transform.localScale.y);
 
-         transform.localScale = localScale;
-     }
+
+        //if (((facingRight) && (localScale.x < 0)) || ((facingRight) && (localScale.x > 0)))
+        //    localScale.x *= 1f;
+        //transform.localScale = localScale;
     }
+}

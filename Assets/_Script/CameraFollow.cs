@@ -11,6 +11,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
+        m_FollowTarget = GameObject.FindWithTag("Player").transform; 
         transform.position = m_FollowTarget.position; 
     }
     private void LateUpdate()
@@ -18,6 +19,6 @@ public class CameraFollow : MonoBehaviour
         var targetPos = m_FollowTarget.position + offset;
         transform.position = targetPos; 
         if (!followVertical)
-            transform.position = new Vector3(m_FollowTarget.position.x,9.5f, m_FollowTarget.position.z) + offset;     
+            transform.position = new Vector3(m_FollowTarget.position.x, 9.5f, m_FollowTarget.position.z) + offset;     
     }
 }
