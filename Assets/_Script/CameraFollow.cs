@@ -11,6 +11,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
+        m_FollowTarget = GameObject.FindWithTag("Player").transform; 
         transform.position = m_FollowTarget.position; 
     }
     private void LateUpdate()
