@@ -16,8 +16,6 @@ public class PlayerMotor : MonoBehaviour
 
     Vector3 localScale; //flip character to face towards where it goes
     [SerializeField] float jumpForce;
-
-
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -60,6 +58,13 @@ public class PlayerMotor : MonoBehaviour
         {
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", true);
+        }
+
+        // handling slide. 
+        if (Input.GetKeyDown(KeyCode.C) && isGrounded && Mathf.Abs(dirX) > 0)
+        {
+            speed = speed + 3; // speed boost for slide. 
+            anim.SetTrigger("Slide"); 
         }
     }
     private void FixedUpdate()
