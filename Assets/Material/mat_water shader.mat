@@ -28,6 +28,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: e64b4705d9d724a4c9520334e54f44e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SecondaryNormal:
+        m_Texture: {fileID: 2800000, guid: 02c0c557648c2914cb16c43172cb40ac, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,8 +45,16 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Second_Noise_Intensity: 1.5
+    - _Strength: 0.5
     m_Colors:
-    - _Normal_Direction: {r: -1, g: 0, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0.1, b: 0, a: 0}
+    - _Noise_Color: {r: 0.8006408, g: 0.9811321, b: 0.9811321, a: 0.4627451}
+    - _Noise_Direction: {r: -0.03, g: 0, b: 0, a: 0}
+    - _Normal_Direction: {r: -0.03, g: 0, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0.05, b: 0, a: 0}
+    - _S_NormalDirection: {r: 0.05, g: 0, b: 0, a: 0}
+    - _Second_Noise_Color: {r: 0.48420256, g: 0.69554335, b: 0.8773585, a: 0.5176471}
+    - _Second_Noise_Direction: {r: -0.01, g: 0.025, b: 0, a: 0}
+    - _WaterColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
   m_BuildTextureStacks: []

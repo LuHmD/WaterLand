@@ -61,3 +61,6 @@ TagManager:
   - name: Foreground
     uniqueID: 92745409
     locked: 0
+  - name: Sun Layer
+    uniqueID: 869357297
+    locked: 0
