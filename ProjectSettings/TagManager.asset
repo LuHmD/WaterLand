@@ -55,9 +55,12 @@ TagManager:
   - name: Background
     uniqueID: 4192507623
     locked: 0
+  - name: Player
+    uniqueID: 2791327481
+    locked: 0
   - name: Foreground
     uniqueID: 92745409
     locked: 0
-  - name: Player
-    uniqueID: 2791327481
+  - name: Sun Layer
+    uniqueID: 869357297
     locked: 0
