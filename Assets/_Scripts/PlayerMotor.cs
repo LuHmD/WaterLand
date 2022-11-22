@@ -31,6 +31,7 @@ public class PlayerMotor : MonoBehaviour
 
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<SpriteRenderer>();
     }
    
 
@@ -44,7 +45,12 @@ public class PlayerMotor : MonoBehaviour
         if (isFacingRight && direction < 0 || !isFacingRight && direction > 0)
             Flip();
     }
- 
+  private void Start()
+    {
+        initialSpeed = speed;
+        localScale = transform.localScale;
+        SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[0]);
+    }
     void Flip()
     {
         isFacingRight = !isFacingRight;
