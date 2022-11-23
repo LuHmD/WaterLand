@@ -24,8 +24,8 @@ public class MenuEvents : MonoBehaviour
         mixer.SetFloat("volume", musicSlider.value);
     }
 
-    /*public void LoadLevel(int index)
+    public void LoadLevel(int index)
     {
         SceneManager.LoadScene(index);
-    }*/
+    }
 }
