@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMotor : MonoBehaviour
 {
@@ -81,7 +82,7 @@ public class PlayerMotor : MonoBehaviour
 
         if (Mathf.Abs(moveX) > 0 && isGrounded)
         {
-            initialSpeed = 6; 
+            initialSpeed = 6;
             anim.SetBool("isRunning", true);
         }
         else

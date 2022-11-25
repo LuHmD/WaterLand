@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform m_FollowTarget;
-    public Vector3 offset; 
 
-    public bool followVertical = false;
+    public Transform target;
+    private Vector3 offset;
+    public float smoothSpeed = 0.04f;
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        m_FollowTarget = GameObject.FindWithTag("Player").transform; 
-        transform.position = m_FollowTarget.position; 
+        offset = transform.position - target.position;
     }
-    private void LateUpdate()
+
+    // Update is called once per frame
+    void LateUpdate()
     {
-        var targetPos = m_FollowTarget.position + offset;
-        transform.position = targetPos; 
-        if (!followVertical)
-            transform.position = new Vector3(m_FollowTarget.position.x, 9.5f, m_FollowTarget.position.z) + offset;     
+        Vector3 newPosition = Vector3.Lerp(transform.position, target.position + offset, smoothSpeed );
+        transform.position = newPosition;
     }
 }
