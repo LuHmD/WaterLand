@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
 
 
-    public static Vector2 lastCheckPointPos = new Vector2(-25, 12);
+    public static Vector2 lastCheckPointPos = new Vector2(-20, 10);
     public GameObject[] playerPrefabs;
     int characterIndex;
 

@@ -12,6 +12,7 @@ TagManager:
   - Goal
   - Ledge Hang
   - Sword
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 

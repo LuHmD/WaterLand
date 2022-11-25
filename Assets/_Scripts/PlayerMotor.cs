@@ -5,60 +5,137 @@ using UnityEngine.Events;
 
 public class PlayerMotor : MonoBehaviour
 {
-    PlayerController controls;
-    float direction = 0;
+    public float speed = 5f;
 
-    public float speed = 200f;
-    bool isFacingRight = true;
-    public Rigidbody2D rigid;
-    public Animator anim;
+    [SerializeField]
+    private LayerMask collideWith;
 
-    public float jumpForce = 15;
+    private float initialSpeed;
+    private Rigidbody2D rigid;
+    private Animator anim;
+    private new SpriteRenderer renderer;
 
+    private float dirX;
+    private float moveX;
+    private bool facingRight = true;
 
+    public Transform feet;
+    public Transform hip;
+    public Transform playerSide;
+
+    private bool isGrounded;
+    private bool hitWall;
+
+    // This will store the player sounds, then we can play using our Sound Singleton on actions (using events in the future)
+    // See arrangement of clips in inspector. 
+    public PlayerClips playerClips;
+
+    Vector3 localScale; //flip character to face towards where it goes
+    [SerializeField] float jumpForce;
     private void Awake()
     {
-        controls = new PlayerController();
-        controls.Enable();
-
-        controls.Land.Move.performed += context => 
-        {
-
-            direction = context.ReadValue<float>();
-        };
-
-        controls.Land.Jump.performed  += context => Jump();
-
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
     }
-   
-
-    private void FixedUpdate()
-    {
-        //Moving player left/right 
-        rigid.velocity = new Vector2(direction * speed * Time.fixedDeltaTime, rigid.velocity.y);
-        anim.SetFloat("speed", Mathf.Abs(direction));
-
-        //flip the player
-        if (isFacingRight && direction < 0 || !isFacingRight && direction > 0)
-            Flip();
-    }
-  private void Start()
+    private void Start()
     {
         initialSpeed = speed;
         localScale = transform.localScale;
         SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[0]);
     }
-    void Flip()
+
+    private void Update()
     {
-        isFacingRight = !isFacingRight;
-        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        print(hitWall + "Wall hit");
+        Debug.DrawLine(hip.position, playerSide.position, Color.red);
+        hitWall = Physics2D.Linecast(hip.position, playerSide.position, collideWith);
+        if (hitWall)
+        {
+            speed = 0;
+        }
+        else
+        {
+            speed = initialSpeed;
+        }
+        anim.SetBool("IsGrounded", isGrounded);
+        RaycastHit2D hit = Physics2D.BoxCast(feet.transform.position, new Vector2(0.5f, 0.5f), 0, Vector2.down, .2f);
+        if (hit)
+            isGrounded = true;
+        else
+            isGrounded = false;
+
+        if (isGrounded)
+        {
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", false);
+        }
+
+        dirX = Input.GetAxisRaw("Horizontal");
+        moveX = dirX * speed;
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[1]);
+            rigid.velocity = Vector2.up * jumpForce;
+        }
+
+        if (Mathf.Abs(moveX) > 0 && isGrounded)
+        {
+            initialSpeed = 6;
+            anim.SetBool("isRunning", true);
+        }
+        else
+            anim.SetBool("isRunning", false);
+        // 0.3 is skin margin for accuracey of transitions. 
+        if (rigid.velocity.y > 0 + 0.3f) //Character goes UP
+            anim.SetBool("isJumping", true);
+
+        if (rigid.velocity.y < 0 + -0.3f)
+        {
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", true);
+        }
+
+        // handling slide. 
+        if (Input.GetKeyDown(KeyCode.C) && isGrounded && Mathf.Abs(moveX) > 0)
+        {
+            SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[2]);
+            // increaes velocity for slide. 
+            initialSpeed = 9; // boost speed. 
+            anim.SetTrigger("Slide");
+        }
     }
-  
-    void Jump()
+    private void FixedUpdate()
     {
-        rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+        rigid.velocity = new Vector2(moveX, rigid.velocity.y);
+    }
+
+    private void LateUpdate()
+    {
+        if (dirX > 0)
+            facingRight = true;
+        else if (dirX < 0)
+            facingRight = false;
+
+        if (facingRight)
+        {
+            renderer.flipX = false;
+            playerSide.localPosition = new Vector2(Mathf.Abs(playerSide.localPosition.x), playerSide.localPosition.y);
+            //transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
+        else
+        {
+            renderer.flipX = true;
+            // flipping side collider when the character flips. 
+
+            playerSide.localPosition = new Vector2(Mathf.Abs(playerSide.localPosition.x) * -1, playerSide.localPosition.y);
+            //transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * -1f, transform.localScale.y);
+        }
+    }
+
+    public void FootStep()
+    {
+        SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[3]);
     }
 }
