@@ -30,7 +30,7 @@ public class PlayerMotor : MonoBehaviour
     // See arrangement of clips in inspector. 
     public PlayerClips playerClips;
 
-    Vector3 localScale; //flip character to face towards where it goes
+    //Vector3 localScale; //flip character to face towards where it goes
     [SerializeField] float jumpForce;
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class PlayerMotor : MonoBehaviour
     private void Start()
     {
         initialSpeed = speed;
-        localScale = transform.localScale;
+        //localScale = transform.localScale;
         SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[0]);
     }
 
@@ -59,8 +59,8 @@ public class PlayerMotor : MonoBehaviour
             speed = initialSpeed;
         }
         anim.SetBool("IsGrounded", isGrounded);
-        RaycastHit2D hit = Physics2D.BoxCast(feet.transform.position, new Vector2(0.5f, 0.5f), 0, Vector2.down, .2f);
-        if (hit)
+      RaycastHit2D hit = Physics2D.BoxCast(feet.transform.position, new Vector2(0.5f, 0.5f), 0, Vector2.down, .2f);
+       if (hit)
             isGrounded = true;
         else
             isGrounded = false;
@@ -78,6 +78,7 @@ public class PlayerMotor : MonoBehaviour
         {
             SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[1]);
             rigid.velocity = Vector2.up * jumpForce;
+            
         }
 
         if (Mathf.Abs(moveX) > 0 && isGrounded)

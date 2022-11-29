@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
 
 
-    public static Vector2 lastCheckPointPos = new Vector2(-20, 10);
+    public static Vector2 lastCheckPointPos ;
     public GameObject[] playerPrefabs;
     int characterIndex;
 
     public static int numberOfCoins;
     public TextMeshProUGUI coinsText;
+
+    private ScoreManager theScoreManager;
 
     private void Awake()
     {
@@ -25,7 +27,9 @@ public class GameManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos;
         
         characterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
-         Instantiate(playerPrefabs[characterIndex], lastCheckPointPos, Quaternion.identity);
+        Instantiate(playerPrefabs[characterIndex], lastCheckPointPos, Quaternion.identity);
+
+        theScoreManager = FindObjectOfType<ScoreManager>();
     }
 
     private void Update()
@@ -41,6 +45,10 @@ public class GameManager : MonoBehaviour
 
     public void ReplayLevel()
     {
+        theScoreManager.scoreIncreasing = false;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        theScoreManager.scoreIncreasing = true;
     }
 }
