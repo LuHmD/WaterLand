@@ -23,8 +23,5 @@ public class OnClickEvents : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
-    public void LoadLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+   
 }
