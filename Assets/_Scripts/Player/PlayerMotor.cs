@@ -9,8 +9,6 @@ public class PlayerMotor : MonoBehaviour
 
     [SerializeField]
     private LayerMask collideWith;
-    [SerializeField]
-    private LayerMask collideWithGround;
 
     private float initialSpeed;
     private Rigidbody2D rigid;
@@ -20,8 +18,6 @@ public class PlayerMotor : MonoBehaviour
     private float dirX;
     private float moveX;
     private bool facingRight = true;
-    private bool CanJump = false;
-
 
     public Transform feet;
     public Transform hip;
@@ -34,7 +30,7 @@ public class PlayerMotor : MonoBehaviour
     // See arrangement of clips in inspector. 
     public PlayerClips playerClips;
 
-    Vector3 localScale; //flip character to face towards where it goes
+    //Vector3 localScale; //flip character to face towards where it goes
     [SerializeField] float jumpForce;
     private void Awake()
     {
@@ -45,14 +41,14 @@ public class PlayerMotor : MonoBehaviour
     private void Start()
     {
         initialSpeed = speed;
-        localScale = transform.localScale;
-        //SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[0]); // Play this sound when the user Clicks button. 
+        //localScale = transform.localScale;
+        SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[0]);
     }
 
     private void Update()
     {
-        if (!GameManager.Instance.isGameStarted || GameManager.Instance.isGameOver)
-            return; 
+        print(hitWall + "Wall hit");
+        Debug.DrawLine(hip.position, playerSide.position, Color.red);
         hitWall = Physics2D.Linecast(hip.position, playerSide.position, collideWith);
         if (hitWall)
         {
@@ -63,12 +59,9 @@ public class PlayerMotor : MonoBehaviour
             speed = initialSpeed;
         }
         anim.SetBool("IsGrounded", isGrounded);
-        RaycastHit2D hit = Physics2D.BoxCast(feet.transform.position, new Vector2(0.5f, 0.5f), 0, Vector2.down, .2f, collideWithGround);
-        if (hit)
-        {
-            CanJump = true; 
+      RaycastHit2D hit = Physics2D.BoxCast(feet.transform.position, new Vector2(0.5f, 0.5f), 0, Vector2.down, .2f);
+       if (hit)
             isGrounded = true;
-        }
         else
             isGrounded = false;
 
@@ -81,11 +74,11 @@ public class PlayerMotor : MonoBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         moveX = dirX * speed;
 
-        if (Input.GetButtonDown("Jump") && isGrounded && CanJump)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[1]);
             rigid.velocity = Vector2.up * jumpForce;
-            CanJump = false; 
+            
         }
 
         if (Mathf.Abs(moveX) > 0 && isGrounded)
@@ -141,6 +134,7 @@ public class PlayerMotor : MonoBehaviour
             //transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * -1f, transform.localScale.y);
         }
     }
+
     public void FootStep()
     {
         SoundManager.Instance.PlayEffect(playerClips.playerSoundFx[3]);
