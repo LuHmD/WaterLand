@@ -1,0 +1,33 @@
+using UnityEngine.SceneManagement;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
+
+public class MenuEvents : MonoBehaviour
+{
+    public Slider soundSlider;
+    //public Slider musicSlider;
+    public AudioMixer mixer;
+    private float soundValue;
+    private float musicValue;
+
+    public TMPro.TextMeshProUGUI _walletText;  
+    private void Start()
+    {
+        Time.timeScale = 1;
+        mixer.GetFloat("volume", out soundValue);
+        soundSlider.value = soundValue;
+        //mixer.GetFloat("volume", out musicValue);
+        //musicSlider.value = musicValue;
+        _walletText.SetText(PlayerPrefs.GetInt("Wallet").ToString()); 
+    }
+    public void SetVolume()
+    {
+        mixer.SetFloat("volume", soundSlider.value);
+        //mixer.SetFloat("volume", musicSlider.value);
+    }
+    public void LoadLevel(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+}

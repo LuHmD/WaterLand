@@ -21,8 +21,6 @@ ScriptedImporter:
     convertToNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
-    swizzle: 50462976
     isReadable: 0
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
@@ -90,6 +88,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
   mosaicSpriteImportData:
   - name: glowStone
@@ -111,6 +110,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -160, y: 377}
   - name: glow
     originalName: 
@@ -131,6 +131,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -27, y: -28}
   - name: stone_a
     originalName: 
@@ -151,6 +152,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 218, y: 63}
   - name: stone_b
     originalName: 
@@ -171,6 +173,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -201, y: 593}
   - name: stone_c
     originalName: 
@@ -191,6 +194,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 65, y: 438}
   - name: stone_d
     originalName: 
@@ -211,6 +215,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 81, y: 906}
   - name: stone_e
     originalName: 
@@ -231,6 +236,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -40, y: 814}
   - name: stone_f
     originalName: 
@@ -251,6 +257,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 181, y: 330}
   - name: stone_g
     originalName: 
@@ -271,6 +278,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -240, y: 319}
   - name: stone_h
     originalName: 
@@ -291,6 +299,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 57, y: 552}
   - name: stone_i
     originalName: 
@@ -311,6 +320,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -106, y: 377}
   rigSpriteImportData:
   - name: glowStone
@@ -332,6 +342,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -160, y: 377}
   - name: glow
     originalName: 
@@ -352,6 +363,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -27, y: -28}
   - name: stone_a
     originalName: 
@@ -372,6 +384,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 218, y: 63}
   - name: stone_b
     originalName: 
@@ -392,6 +405,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -201, y: 593}
   - name: stone_c
     originalName: 
@@ -412,6 +426,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 65, y: 438}
   - name: stone_d
     originalName: 
@@ -432,6 +447,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 81, y: 906}
   - name: stone_e
     originalName: 
@@ -452,6 +468,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -40, y: 814}
   - name: stone_f
     originalName: 
@@ -472,6 +489,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 181, y: 330}
   - name: stone_g
     originalName: 
@@ -492,6 +510,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -240, y: 319}
   - name: stone_h
     originalName: 
@@ -512,6 +531,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: 57, y: 552}
   - name: stone_i
     originalName: 
@@ -532,13 +552,13 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    parentGroupIndex: -1
     uvTransform: {x: -106, y: 377}
   characterData:
     bones: []
     parts: []
     dimension: {x: 0, y: 0}
     characterGroups: []
-    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   sharedRigSpriteImportData: []
   sharedRigCharacterData:
@@ -546,7 +566,6 @@ ScriptedImporter:
     parts: []
     dimension: {x: 0, y: 0}
     characterGroups: []
-    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   platformSettings:
   - name: Default
@@ -581,7 +600,6 @@ ScriptedImporter:
   paperDollMode: 0
   keepDupilcateSpriteName: 0
   skeletonAssetReferenceID: 
-  padding: 4
   spriteCategoryList:
     categories: []
   spritePackingTag: 
@@ -810,7 +828,6 @@ ScriptedImporter:
     isVisible: 1
   sharedRigPSDLayers: []
   pSDLayerImportSetting: []
-  importFileNodeState: 1
   generateGOHierarchy: 0
   textureAssetName: artefact Texture
   prefabAssetName: artefact Prefab
