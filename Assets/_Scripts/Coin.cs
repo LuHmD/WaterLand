@@ -10,6 +10,7 @@ public class Coin : MonoBehaviour
         {
             GameManager.numberOfCoins++;
             PlayerPrefs.SetInt("NumberOfCoins", GameManager.numberOfCoins);
+
             Destroy(gameObject);
         }
     }

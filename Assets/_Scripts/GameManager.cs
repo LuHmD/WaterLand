@@ -45,10 +45,10 @@ public class GameManager : MonoBehaviour
 
     public void ReplayLevel()
     {
-        theScoreManager.scoreIncreasing = false;
+       // theScoreManager.scoreIncreasing = false;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        theScoreManager.scoreIncreasing = true;
+       // theScoreManager.scoreIncreasing = true;
     }
 }
