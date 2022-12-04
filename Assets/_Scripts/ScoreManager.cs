@@ -6,41 +6,68 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    [SerializeField]
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreText1;
     public TextMeshProUGUI highScoreText;
 
-    public float scoreCount;
-    public float highScoreCount;
+    public int scoreCount;
+    public int highScoreCount;
 
-    public float pointsPerSeconds;
+    
 
-    public bool scoreIncreasing;
+    public bool multiplePickedUp;
+   
     // Start is called before the first frame update
     void Start()
     {
-      if(PlayerPrefs.HasKey("HighScore"))
+        multiplePickedUp = false;
+
+        if (PlayerPrefs.HasKey("HighScore"))
         {
-            highScoreCount = PlayerPrefs.GetFloat("HighScore");
+            highScoreCount = PlayerPrefs.GetInt("HighScore");
 
         }
-         
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (scoreIncreasing)
-        {
-        scoreCount += pointsPerSeconds * Time.deltaTime;
-        }
+        
 
-        if(scoreCount > highScoreCount)
+        scoreText.text = "Score: " + scoreCount;
+
+        if (scoreCount > highScoreCount)
         {
             highScoreCount = scoreCount;
             PlayerPrefs.SetFloat("HighScore", highScoreCount);
         }
 
-        scoreText.text = "Score: " + Mathf.Round(scoreCount);
-        highScoreText.text = "HighScore: " + Mathf.Round(highScoreCount);
+        scoreText1.text = "Score: " + scoreCount;
+        highScoreText.text = "HighScore: " + highScoreCount;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag =="multiple")
+        {
+            multiplePickedUp = true;
+            collision.gameObject.SetActive(false);
+
+        }
+
+        if (collision.transform.tag == ("Coin")&& !multiplePickedUp)
+        {
+            scoreCount += 2;
+
+        }
+
+        if (collision.transform.tag == ("Coin")&& multiplePickedUp)
+        {
+            scoreCount = 2*3;
+
+        }
     }
 }
